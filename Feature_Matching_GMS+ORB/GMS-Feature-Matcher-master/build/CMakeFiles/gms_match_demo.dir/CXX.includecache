@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/gms_matcher.h
+opencv2/opencv.hpp
+-
+vector
+-
+iostream
+-
+ctime
+-
+
+/home/iris_dl/IRiS_WS/Sang Min Lee/NAVERLABS_PlaceRecognition/Feature_Matching_GMS+ORB/GMS-Feature-Matcher-master/src/demo.cpp
+gms_matcher.h
+/home/iris_dl/IRiS_WS/Sang Min Lee/NAVERLABS_PlaceRecognition/Feature_Matching_GMS+ORB/GMS-Feature-Matcher-master/src/gms_matcher.h
+opencv2/cudafeatures2d.hpp
+-
+
