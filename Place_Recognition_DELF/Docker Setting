@@ -1,0 +1,46 @@
+sudo nvidia-docker run --gpus all -it \
+-p 8888:8888 -p 6006-6015:6006-6015 \
+-v ~/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition:/data \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-e DISPLAY=unix$DISPLAY \
+--name iismn_tf2_gpu_gui \
+tensorflow/tensorflow:latest-gpu-jupyter
+
+sudo nvidia-docker run --gpus all -it \
+-p 8888:8888 -p 6006-6015:6006-6015 \
+-v ~/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition:/data \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-e DISPLAY=unix$DISPLAY \
+--name iismn_tf2 \
+--ipc=host iismn/jupyterlab_tensorflow2:master \
+jupyter lab --no-browser \
+--ip=0.0.0.0 \
+--allow-root \
+--NotebookApp.token= --notebook-dir='/data'
+
+8b16363cef5aae2872072873c1b4abc3a5a6e11f0cc73fcef94f5737c03f0084 container id
+gedit /var/lib/docker/containers/8b16363cef5aae2872072873c1b4abc3a5a6e11f0cc73fcef94f5737c03f0084/config.v2.json
+--------------------------
+Setting
+
+cd TensorFlow1.13_Models/research && export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
+cd tensorflow/deeplab-MVD
+./local_test_mvd.sh
+
+tensorboard --logdir=/data/TensorFlow1.13_RES/DeepLabV3+_Mapillary_Vistas/datasets/mvd/exp/train_on_train_set_pascal_voc_2012_iter_20000_bs_16_lr_5e-3_lr_decay_step_200_weight_decay_1e-5/train/
+
+jupyter lab --allow-root --NotebookApp.token=''
+
+xhost +local:docker
+
+---------------------------
+Docker Commit / Push
+
+commint example : docker commit -a "jjy" [Container ID] ImageID:Tag
+Push example : docker push iismn/jupyterlab_ros:master 
+
+
+https://marcokhan.tistory.com/m/248?category=792822

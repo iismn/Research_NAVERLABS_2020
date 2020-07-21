@@ -1,20 +1,80 @@
 #include "gms_matcher.h"
-
+#include <fstream>
+#include <sstream>
 //#define USE_GPU
 #ifdef USE_GPU
 #include <opencv2/cudafeatures2d.hpp>
 using cuda::GpuMat;
 #endif
 
-void GmsMatch(Mat &img1, Mat &img2);
+int GmsMatch(Mat &img1, Mat &img2);
 Mat DrawInlier(Mat &src1, Mat &src2, vector<KeyPoint> &kpt1, vector<KeyPoint> &kpt2, vector<DMatch> &inlier, int type);
 
 void runImagePair() {
-	Mat img1 = imread("../data/40027089_1566000000001302.jpg");
-	Mat img2 = imread("../data/AC01324954_1566267187691000.jpg");
 
-	GmsMatch(img1, img2);
+    ifstream QFile("../data/Result_B1_Q_0711.txt");
+    ofstream FilteredFile;
+    FilteredFile.open ("FilteredResult_B1_DB_0711.txt");
+    int iteration_Q = 0;
+    int iteration_Compare = 0;
+    if (QFile.is_open()) {
+
+        string DBLine;
+        string QLine;
+        string Result_Img;
+
+        while (getline(QFile, QLine)) {
+            iteration_Q++;
+            string QPath = "/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_TestDataset/Test/B1/images/";
+            QPath += QLine.c_str();
+            vector<string> DBPath;
+            vector<string> DBFileName;
+            int iteration = 1;
+            ifstream DBFile("../data/Result_B1_DB_0711.txt");
+            int i = 0;
+            while (getline(DBFile, DBLine)) {
+                if (iteration < iteration_Compare+6 && iteration > iteration_Compare){
+                    string DBPath_Temp = "/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_TestDataset/images/";
+                    DBPath_Temp += DBLine.c_str();
+                    DBPath.push_back(DBPath_Temp);
+                    DBFileName.push_back(DBLine.c_str());
+                    i++;
+                }
+                iteration++;
+            }
+            DBFile.close();
+            iteration_Compare += 5;
+
+            Mat imgQuery = imread(QPath);
+            int featureSize = 0;
+            int featureSize_Prv = 0;
+            for (int i = 0; i < 5; i++){
+                Mat imgDataBase = imread(DBPath[i]);
+                featureSize = GmsMatch(imgQuery, imgDataBase);
+                if (featureSize > featureSize_Prv){
+                    featureSize_Prv = featureSize;
+                    Result_Img = DBFileName[i];
+                }
+
+            }
+            cout << "Result Image : " << Result_Img << " / Result Feature Size : " << featureSize_Prv << endl;
+            FilteredFile << Result_Img << endl;
+            cout << "Iteration of Query Image : " << iteration_Q << endl << endl;
+        }
+//        imshow("show",img1);
+//        waitKey();
+        QFile.close();
+        FilteredFile.close();
+
+    }
+    // GMS+ORB : Loop in Maximize Feature Correspondence
+
+//	featureSize = GmsMatch(img1, img2);
+
+//	cout << featureSize << endl;
+
 }
+
 
 
 int main()
@@ -29,7 +89,7 @@ int main()
 	return 0;
 }
 
-void GmsMatch(Mat &img1, Mat &img2) {
+int GmsMatch(Mat &img1, Mat &img2) {
 	vector<KeyPoint> kp1, kp2;
 	Mat d1, d2;
 	vector<DMatch> matches_all, matches_gms;
@@ -77,13 +137,12 @@ void GmsMatch(Mat &img1, Mat &img2) {
 		test_feature.push_back(kp2[idx1].pt);
 
 	}
-
-	cout << train_feature << endl;
-	cout << test_feature << endl;
 	// draw matching
 	Mat show = DrawInlier(img1, img2, kp1, kp2, matches_gms, 1);
-	imshow("show", show);
-	waitKey();
+//	imshow("show", show);
+//	waitKey();
+
+	return train_feature.size();
 }
 
 Mat DrawInlier(Mat &src1, Mat &src2, vector<KeyPoint> &kpt1, vector<KeyPoint> &kpt2, vector<DMatch> &inlier, int type) {

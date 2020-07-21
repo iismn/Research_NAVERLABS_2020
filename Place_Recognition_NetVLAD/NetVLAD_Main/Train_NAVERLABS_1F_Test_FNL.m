@@ -6,26 +6,12 @@
 % iismn@kaist.ac.kr
 % KAIST W16 Geocentrifuge Research Center IRiS Lab.
 
-% %% A. ROS Init
-% % A-1. Clear Work Space
-% clc; clear; close all; rosshutdown
-% % A-2. ROS initialize 
-% IP_BackEnd = '192.168.1.14';
-% rosinit(IP_BackEnd,11311);
-% 
-% %% B. ROS Communication : Publish Topic
-% % B-1. Set Publisher / Image Transport
-% [jointTauPub_1, jtMsg_1] = rospublisher('/test_features');
-% [jointTauPub_1, jtMsg_1] = rospublisher('/test_name');
-% [jointTauPub_1, jtMsg_1] = rospublisher('/train_features');
-% [jointTauPub_1, jtMsg_1] = rospublisher('/train_name');
-
 %% C. NetVLAD Network Load
 % C-1. Load NAVERLABS_NetVLAD Network
-load('/home/iris_dl/IRiS_WS/Sang Min Lee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_Main/datasets/NAVERLABS_Indoor_1F_test.mat')       % Structured Data
-load('/home/iris_dl/IRiS_WS/Sang Min Lee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_OutPut/1F/NetTotal/Test_PredefinedData.mat')       % Structured Data
-load('/home/iris_dl/IRiS_WS/Sang Min Lee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_OutPut/1F/NetTotal/SavedSession.mat')                        % 1F
-% load('/home/iismn/IISMN_CODE/NAVER_LABS/IISMN/Place_Recognition_NetVLAD/NetVLAD_OutPut/1F/NetTotal/SavedSession.mat')                   % 2F
+clc; clear;
+load('/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_Main/datasets/NAVERLABS_Indoor_1F_test.mat')       % Structured Data
+load('/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_OutPut/1F/NetTotal/Test_PredefinedData.mat')       % Structured Data
+load('/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition/Place_Recognition_NetVLAD/NetVLAD_OutPut/1F/NetTotal/SavedSession.mat')                        % 1F
 
 % C-2. Insert Network
 net= relja_simplenn_tidy(finalNet);
@@ -69,127 +55,39 @@ toTest= 1:dbTest.numQueries;
 nTop= max(opts.recallNs);
 
 %% E. Main Loop
+Matched_Result_DB = [];
+Matched_Result_Q = [];
+tc = zeros(1969,5);
+
+fileDB = fopen('Result_1F_DB_0720.txt','w');
+fileQ = fopen('Result_1F_Q_0720.txt','w');
+
 for iTestSample= 1:length(toTest)
 
     wait =1;
     iTest= toTest(iTestSample);
     ids= searcherRAW(iTest, nTop);
-   
-    figure(1)
-    refresh
-    subplot(2,5,1:5)
-    imshow(dbStruct.qImageFns{iTestSample})
-    title('Query Image')
-    subplot(2,5,6)
-    imshow(dbStruct.dbImageFns{ids(1)})
-    title('Retrived Image')
-    subplot(2,5,7)
-    imshow(dbStruct.dbImageFns{ids(2)})
-    title('Retrived Image')
-    subplot(2,5,8)
-    imshow(dbStruct.dbImageFns{ids(3)})
-    title('Retrived Image')    
-    subplot(2,5,9)
-    imshow(dbStruct.dbImageFns{ids(4)})
-    title('Retrived Image')   
-    subplot(2,5,10)
-    imshow(dbStruct.dbImageFns{ids(5)})
-    title('Retrived Image')
 
     PrvMatchedPoint = 0;
+    matched_Index_Q_FNL = [];
+    matched_Index_DB_FNL = [];
     for i = 1:5
+
+        matched_Index_Q= dbStruct.qImageFns{iTestSample};
+        matched_Index_DB = dbStruct.dbImageFns{ids(i)};
         
-        Origin_Query_Img = imread(dbStruct.qImageFns{iTestSample});
-        Origin_DB_Img = imread(dbStruct.dbImageFns{ids(i)});
 
-        Query_Img = rgb2gray(imread(dbStruct.qImageFns{iTestSample}));
-        DB_Img = rgb2gray(imread(dbStruct.dbImageFns{ids(i)}));
-
-        % Detect dense feature points (Dense Feature)
-        imagePoints_Q = detectBRISKFeatures(Query_Img);
-        imagePoints_DB = detectBRISKFeatures(DB_Img);
-        [features_Q,valid_points_Q] = extractFeatures(Query_Img,imagePoints_Q);
-        [features_DB,valid_points_DB] = extractFeatures(DB_Img,imagePoints_DB);
-        indexPairs_Prv= matchFeatures(features_Q,features_DB);
-
-        matchedPoints_Q = valid_points_Q(indexPairs_Prv(:,1),:);
-        matchedPoints_DB = valid_points_DB(indexPairs_Prv(:,2),:);
-
-        if size(matchedPoints_Q,1) > PrvMatchedPoint
-            matched_Image_Q = Origin_Query_Img;
-            matched_image_DB = Origin_DB_Img;
-            matched_Point_Q_FNL = matchedPoints_Q;
-            matched_Point_DB_FNL = matchedPoints_DB;
-            matched_Index_Q_FNL = dbStruct.qImageFns{iTestSample};
-            matched_Index_DB_FNL = dbStruct.dbImageFns{ids(i)};
-            PrvMatchedPoint = size(matchedPoints_Q,1);
-            
-
-        end
+        fprintf(fileQ,'%s\n',matched_Index_Q);
+        fprintf(fileDB,'%s\n',matched_Index_DB);
     end
     
     iTestSample
-
-    [fMatrix, epipolarInliers, status] = estimateFundamentalMatrix(...
-      matched_Point_Q_FNL, matched_Point_DB_FNL, 'Method', 'RANSAC', ...
-      'NumTrials', 10000, 'DistanceThreshold', 0.1, 'Confidence', 99.99);
-
-    matched_Point_Q_FNL = matched_Point_Q_FNL(epipolarInliers, :);
-    matched_Point_DB_FNL = matched_Point_DB_FNL(epipolarInliers, :);
     
+    Matched_Result_DB = [Matched_Result_DB; matched_Index_DB_FNL];
+    Matched_Result_Q = [Matched_Result_Q; matched_Index_Q_FNL];
     
-    figure(2)
-    refresh
-    ax = axes;
-    showMatchedFeatures(matched_Image_Q,matched_image_DB,matched_Point_Q_FNL,matched_Point_DB_FNL,'montage','Parent',ax);    
-    
-    Matched_Result_DB{iTestSample} = matched_Index_DB_FNL;
-    Matched_Result_Q{iTestSample} = matched_Index_Q_FNL;
-    
-%     jtMsg_1.Data = tau(1);
-%     send(jointTauPub_1,jtMsg_1);
-%      jtMsg_2.Data = tau(2);
-%     send(jointTauPub_2,jtMsg_2);
-%      jtMsg_3.Data = tau(3);
-%     send(jointTauPub_3,jtMsg_3);
-%      jtMsg_4.Data = tau(4);
-%     send(jointTauPub_4,jtMsg_4); 
-    
-%     while wait == 1
-%         msg2 = receive(sub,10);
-%         wait = msg2.answer;
-%     end
     
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+fclose(fileDB);
+fclose(fileQ);

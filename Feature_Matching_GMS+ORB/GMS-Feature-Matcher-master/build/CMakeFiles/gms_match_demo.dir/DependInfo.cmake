@@ -4,19 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/iris_dl/IRiS_WS/Sang Min Lee/NAVERLABS_PlaceRecognition/Feature_Matching_GMS+ORB/GMS-Feature-Matcher-master/src/demo.cpp" "/home/iris_dl/IRiS_WS/Sang Min Lee/NAVERLABS_PlaceRecognition/Feature_Matching_GMS+ORB/GMS-Feature-Matcher-master/build/CMakeFiles/gms_match_demo.dir/src/demo.cpp.o"
+  "/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition/Feature_Matching_GMS+ORB/GMS-Feature-Matcher-master/src/demo.cpp" "/home/iris_dl/IRiS_WS/SangMinLee/NAVERLABS_PlaceRecognition/Feature_Matching_GMS+ORB/GMS-Feature-Matcher-master/build/CMakeFiles/gms_match_demo.dir/src/demo.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "OPENCV_TRAITS_ENABLE_DEPRECATED"
-  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
-  "/usr/local/include/opencv"
+  "/usr/include/opencv"
   )
 
 # Targets to which this target links.
