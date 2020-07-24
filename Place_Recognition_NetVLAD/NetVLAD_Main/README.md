@@ -15,10 +15,10 @@ NetVLAD is distributed under the MIT License (see the `LICENCE` file).
 2. CUDA 10.0 + CuDNN 2.6.5
 3. Compiler with VS2019 (Not using MATLAB MinGW)
 
-- Test Computer Setting
-CPU : I5 10600K
-GPU : RTX 2080 Ti 1x
-SSD : NVME 1TB WD Black
+- Test Computer Setting  
+CPU : I5 10600K  
+GPU : RTX 2080 Ti 1x  
+SSD : NVME 1TB WD Black  
 
 ## Dependencies
 
@@ -29,15 +29,7 @@ SSD : NVME 1TB WD Black
 
 ## Data
 
-### Datasets
-
-Visit our [project page](http://www.di.ens.fr/willow/research/netvlad/) for information on how to get the datasets. You can also use your custom dataset by creating the appropriate MATLAB object: inherit from `datasets/dbBase.m` (instructions provided in the file's comments).
-
-### Our trained networks
-
-Download them from our [project page](http://www.di.ens.fr/willow/research/netvlad/).
-
-### If you want to train your networks
+### Custom Train NetVLAD Network
 
 In [1] we always started from networks pretrained on other tasks (ImageNet / Places205), download these from the [MatConvNet website](http://www.vlfeat.org/matconvnet/pretrained/). Download `imagenet-caffe-ref` and `imagenet-vgg-verydeep-16` for the AlexNet and VGG-16 experiments, respectively.
 
