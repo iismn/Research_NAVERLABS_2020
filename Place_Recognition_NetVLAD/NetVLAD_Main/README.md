@@ -10,15 +10,22 @@ http://www.di.ens.fr/willow/research/netvlad/
 NetVLAD is distributed under the MIT License (see the `LICENCE` file).
 
 # Setup
+## Computer SET
+1. MATLAB R2019b
+2. CUDA 10.0 + CuDNN 2.6.5
+3. Compiler with VS2019 (Not using MATLAB MinGW)
+
+- Test Computer Setting
+CPU : I5 10600K
+GPU : RTX 2080 Ti 1x
+SSD : NVME 1TB WD Black
 
 ## Dependencies
 
-The code is written in MATLAB, and depends on the following libraries:
-
-1. [relja_matlab](https://github.com/Relja/relja_matlab) v1.02 or above
-2. [MatConvNet](http://www.vlfeat.org/matconvnet/) (requires v1.0-beta18 or above)
-3. Optional but **highly** recommended for speed: [Yael_matlab](http://yael.gforge.inria.fr/index.html) (tested using version 438), and not used for feature extraction (i.e. the feed forward pass)
-    - To download it's easiest to go [here](http://yael.gforge.inria.fr/index.html) and download the precompiled yael_matlab binaries for your OS (e.g. [yael_matlab_linux64_v438.tar.gz](https://gforge.inria.fr/frs/download.php/file/34218/yael_matlab_linux64_v438.tar.gz))
+1. [relja_matlab](https://github.com/Relja/relja_matlab) v1.02 above
+2. [MatConvNet](http://www.vlfeat.org/matconvnet/) v1.0-beta18 above
+3. [Yael_matlab](http://yael.gforge.inria.fr/index.html) v438
+    - Download [here](http://yael.gforge.inria.fr/index.html) / Download (e.g. [yael_matlab_linux64_v438.tar.gz](https://gforge.inria.fr/frs/download.php/file/34218/yael_matlab_linux64_v438.tar.gz))
 
 ## Data
 
