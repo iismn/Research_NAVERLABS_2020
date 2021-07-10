@@ -7,4 +7,6 @@ Place Recognition - VGG16 + NetVLAD Network
 Feature Extraction - Pretrained SuperPoint + Finetuned Parameter  
 Feature Matching - Pretrained SuperGlue + Finetuned Parameter
 
+*PointCloud Regeneration NOT Included
+
 Will Update Soon
