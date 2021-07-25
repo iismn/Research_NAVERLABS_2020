@@ -8,8 +8,6 @@
 
 
 ## <div align=left>:heavy_plus_sign:REPO USE</div> 
-<pre>cd catkin_ws/  
-git clone https://github.com/iismn/AGV-SENSOR-PACK  
-cd .. && catkin_make</pre>
+<pre>cd catkin_ws/  </pre>
 
 ## <div align=left>:heavy_plus_sign:ADD INFO</div>
