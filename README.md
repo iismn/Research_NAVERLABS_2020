@@ -1,8 +1,8 @@
 ![header](https://capsule-render.vercel.app/api?type=rect&color=timeGradient&text=NAVLER%20LABS%20CHALLENGE%20"2020"&fontSize=20)
 
 ## <div align=left>:heavy_plus_sign:REPO INFO</div>  
-- KAIST IRiS Lab. Autonomous Vehicle "PHAROS" 
-- VEHICLE SENSOR PACKAGE  
+- 2020 NAVERLABS Localization Challenge
+- SOTA 1st 'Indoor Localization' / PHAROS LOCALIZATION TEAM.
 
 ## <div align=left>:heavy_plus_sign:REPO CONFIG</div>  
 #### PHAROS/MSG  
