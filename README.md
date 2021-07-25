@@ -6,6 +6,7 @@
 
 ## <div align=left>:heavy_plus_sign:REPO CONFIG</div>  
 
+![image](https://user-images.githubusercontent.com/59192985/126891886-8f27442b-a3e1-450a-92ae-47341f930048.png)
 
 ## <div align=left>:heavy_plus_sign:REPO USE</div> 
 <pre>cd catkin_ws/  </pre>
