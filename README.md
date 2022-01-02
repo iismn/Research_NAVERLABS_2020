@@ -1,12 +1,13 @@
-![header](https://capsule-render.vercel.app/api?type=rect&color=timeGradient&text=NAVLER%20LABS%20CHALLENGE%20"2020"&fontSize=20)
+![header](https://capsule-render.vercel.app/api?type=rect&color=timeGradient&text=NAVERLABS%20Localization%20Challenge%20&fontSize=20)
 
-## <div align=left>:heavy_plus_sign:REPO INFO</div>  
-- 2020 NAVERLABS Localization Challenge
-- SOTA 1st 'Indoor Localization' / PHAROS LOCALIZATION TEAM.
+## <div align=left>Repository Information</div>  
+- 1st SOTA Performance at Challenge  
+- 2020 NAVERLABS Localization Challenge - Indoor Environment  
+- PHAROS, KAIST IRiS Autonomous Team - Jeong Gwang Uk*, Lee Sang Min, Lee Joong Ku   
 
-## <div align=left>:heavy_plus_sign:REPO CONFIG</div>  
-
-![image](https://user-images.githubusercontent.com/59192985/126891886-8f27442b-a3e1-450a-92ae-47341f930048.png)
+## <div align=left>Overview Example</div>  
+- Retrieved Position + 3D PnP visualization (RViz)  
+[![Video Label](http://img.youtube.com/vi/u13pD5tT-z8/0.jpg)](https://youtu.be/u13pD5tT-z8)
 
 ## <div align=left>:heavy_plus_sign:REPO USE</div> 
 <pre>cd catkin_ws/  </pre>
