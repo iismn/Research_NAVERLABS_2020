@@ -9,7 +9,9 @@
 - Retrieved Position + 3D PnP visualization (RViz)  
 [![Video Label](http://img.youtube.com/vi/u13pD5tT-z8/0.jpg)](https://youtu.be/u13pD5tT-z8)
 
-## <div align=left>How to USE?</div> 
+## <div align=left>How to USE</div> 
 <pre>cd catkin_ws/  </pre>
+- Working
 
 ## <div align=left>Reference</div>
+- Relja Arandjelović, NetVLAD: CNN architecture for weakly supervised place recognition, IEEE Computer Vision and Pattern Recognition (CVPR), 2016.
