@@ -9,7 +9,7 @@
 - Retrieved Position + 3D PnP visualization (RViz)  
 [![Video Label](http://img.youtube.com/vi/u13pD5tT-z8/0.jpg)](https://youtu.be/u13pD5tT-z8)
 
-## <div align=left>:heavy_plus_sign:REPO USE</div> 
+## <div align=left>How to USE?</div> 
 <pre>cd catkin_ws/  </pre>
 
-## <div align=left>:heavy_plus_sign:ADD INFO</div>
+## <div align=left>Reference</div>
