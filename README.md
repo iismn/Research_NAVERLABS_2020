@@ -3,7 +3,7 @@
 ## <div align=left>Repository Information</div>  
 - 1st SOTA Performance at Challenge  
 - 2020 NAVERLABS Localization Challenge - Indoor Environment  
-- PHAROS, KAIST IRiS Autonomous Team - Jeong Gwang Uk*, Lee Sang Min, Lee Joong Ku   
+- PHAROS, KAIST IRiS Autonomous Vehicle Team - Jeong Gwang Uk*, Lee Sang Min, Lee Joong Ku   
 
 ## <div align=left>Overview Example</div>  
 - Retrieved Position + 3D PnP visualization (RViz)  
