@@ -8,7 +8,7 @@
 ## <div align=left>Team Information</div>  
 - Jeong Gwang Uk*(Senior Researcher, RideFlux, KOREA)
 - Lee Sang Min   (M.S., KAIST IRiS Lab, KOREA) 
-- Lee Joong Ku   (Ph.D, Candidate, KAIST IRiS Lab, KOREA)  
+- Lee Joong Ku   (Ph.D Candidate, KAIST IRiS Lab, KOREA)  
 
 ## <div align=left>Overview Example</div>  
 - Retrieved Position + 3D PnP visualization (RViz)  
