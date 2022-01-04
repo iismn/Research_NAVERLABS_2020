@@ -4,6 +4,7 @@
 - 1st SOTA Performance at Challenge  
 - 2020 NAVERLABS Localization Challenge - Indoor Environment  
 - PHAROS, KAIST IRiS Autonomous Vehicle Team  
+  
 - Jeong Gwang Uk*(Researcher, RideFlux, KOREA)
 - Lee Sang Min   (M.S., KAIST IRiS Lab, KOREA) 
 - Lee Joong Ku   (Ph.D, Candidate, KAIST IRiS Lab, KOREA)  
